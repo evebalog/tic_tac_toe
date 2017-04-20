@@ -56,7 +56,7 @@ describe Board do
     expect(board.fields[0]).to eq 'X'
   end
 
-  it 'game is not finished when not all the fields are marked' do
+  it 'game starts unfinished' do
     board = Board.new
     expect(board.is_finished?).to eq false
   end
@@ -68,4 +68,20 @@ describe Board do
     end
     expect(board.is_finished?).to eq true
   end
+
+  it 'finishes the game if a winning combo played' do
+    board = Board.new
+    board.mark(0)
+    board.mark(4)
+    board.mark(1)
+    board.mark(5)
+    board.mark(2)
+    expect(board.has_a_winner?).to eq true
+  end
+
+  it 'game starts without winners' do
+    board = Board.new
+    expect(board.has_a_winner?).to eq false
+  end
+
 end
